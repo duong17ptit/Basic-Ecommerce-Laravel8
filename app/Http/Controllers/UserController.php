@@ -21,6 +21,17 @@ class UserController extends Controller
             $rq->session()->put('user', $user);
             return redirect('/product') ;
         }
-
+    }
+    function register(Request $rq)
+    {
+        # code...
+        $user = new User();
+        $user->name = $rq->name;
+        $user->email =  $rq->email;
+        $user->password = Hash::make($rq->password);
+        $user->role = "customer";
+        $user->save();
+        $rq->session()->put('messa', 'Register Successfully! Login Now ');
+        return redirect('/login') ;
     }
 }

@@ -5,14 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>E-commere</title>
+    <title>QT5 Apple</title>
     <!-- CSS only -->
     <!-- CSS only -->
+    <link rel="icon" href="{{ URL::asset('resources/images/qt5.PNG') }}" type="image/gif" sizes="20x10">
+    <link rel="stylesheet" href="{{ URL::asset('resources/css/app.css') }} ">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="{{ asset('resources/vendors/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/vendors/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/vendors/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/vendors/linericon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/vendors/owl-carousel/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/vendors/owl-carousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
     <style>
         .custom-login {
             height: 500px;
@@ -62,6 +72,17 @@
     @yield('content')
     {{ View::make('footer') }}
     <!-- JavaScript Bundle with Popper -->
+    <script src="{{ asset('resources/vendors/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/skrollr.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/nice-select/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/jquery.form.js') }}"></script>
+    <script src="{{ asset('resources/vendors/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/contact.js') }}"></script>
+    <script src="{{ asset('resources/vendors/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('resources/vendors/mail-script.js') }}"></script>
+    <script src="{{ asset('resources/js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js"
         integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
