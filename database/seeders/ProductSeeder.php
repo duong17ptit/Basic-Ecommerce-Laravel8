@@ -19,30 +19,35 @@ class ProductSeeder extends Seeder
             'price' => '400',
             'category' => 'mobile',
             'description' => 'A smartphone of Apple 2018',
+            'color' => 'white',
             'gallery' => 'https://cdn.tgdd.vn/Products/Images/42/190321/iphone-xs-max-bac-1-1-1-org.jpg'
         ],
         [   'name'=>'Iphone 11',
             'price' => '300',
             'category' => 'mobile',
             'description' => 'A smartphone of Apple 2019',
+            'color' => 'Mint Green',
             'gallery' => 'https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-xanh-la-1-1-org.jpg'
         ],
         [   'name'=>'Iphone 11 Pro',
             'price' => '500',
             'category' => 'mobile',
             'description' => 'A smartphone of Apple 2019',
+            'color' => 'Gold',
             'gallery' => 'https://cdn.tgdd.vn/Products/Images/42/188705/iphone-11-pro-vang-1-1-org.jpg'
         ],
         [   'name'=>'Iphone 11 Promax',
             'price' => '800',
             'category' => 'mobile',
             'description' => 'A smartphone of Apple 2019',
+            'color' => 'Midnight Green',
             'gallery' => 'https://cdn.tgdd.vn/Products/Images/42/200533/iphone-11-pro-max-xanh-1-1-org.jpg'
         ],
         [   'name'=>'Iphone 12 pro',
             'price' => '200',
             'category' => 'mobile',
             'description' => 'A smartphone of Apple 2020',
+            'color' => 'Pacific Blue',
             'gallery' => 'https://cdn.tgdd.vn/Products/Images/42/213032/iphone-12-pro-xanh-1-org.jpg'
         ],
         ]);

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateCartTable extends Migration
 {
@@ -17,6 +18,7 @@ class CreateCartTable extends Migration
             $table->id();
             $table->integer('product_id');
             $table->integer('user_id');
+            $table->integer('qty')->nullable();
             $table->timestamps();
         });
     }

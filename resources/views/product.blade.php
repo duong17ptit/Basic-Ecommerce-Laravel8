@@ -96,7 +96,7 @@
                 </div>
                 <div class="card-body">
                   <p>{{ $item->category }}</p>
-                  <h4 class="card-product__title"><a href="single-product.html">{{ $item->name }}</a></h4>
+                  <h4 class="card-product__title"><a href="product/detail/{{$item->id}}">{{ $item->name }}</a></h4>
                   <p class="card-product__price">${{ $item->price }}</p>
                 </div>
               </div>
