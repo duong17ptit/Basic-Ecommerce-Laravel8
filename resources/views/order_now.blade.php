@@ -27,8 +27,13 @@
                                 <div>
                                     <h6 class="my-0">{{ $item_in_cart->name }}</h6>
                                     <small class="text-muted">{{ $item_in_cart->color }}</small>
+                                    
                                 </div>
-                                <span class="text-muted">${{ $item_in_cart->price }}</span>
+                                <div >
+                                  <span class="text-muted">${{ $item_in_cart->price }}</span>
+                                  <span class="text-muted">x {{ $item_in_cart->cart_qty }}</span>
+                                </div>
+                               
                             </li>
                         @endforeach
 
@@ -46,13 +51,13 @@
                     </div>
                     <span class="text-muted">$5</span>
                   </li> --}}
-                        {{-- <li class="list-group-item d-flex justify-content-between bg-light">
+                        <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
-                                <h6 class="my-0">Promo code</h6>
-                                <small>EXAMPLECODE</small>
+                                <h6 class="my-0">Shipping</h6>
+                                <small>Free</small>
                             </div>
-                            <span class="text-success">−$5</span>
-                        </li> --}}
+                            <span class="text-success">$0</span>
+                        </li>
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total (USD)</span>
                             <strong>${{ $total }}</strong>

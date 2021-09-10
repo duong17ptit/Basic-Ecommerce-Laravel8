@@ -15,12 +15,12 @@
         </div> --}}
 
         @if (Session::has('message'))
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-success" role="alert">
             {{Session::get('message')}} 
             {{Session::forget('message')}}
         </div>
         @endif
-
+        @if (count($cartProducts)>0)
         <div class="table-responsive shopping-cart">
             <table class="table">
                 <thead>
@@ -34,6 +34,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <form class="count-input" action="{{ url('/cart/update') }}" id="form_qty"  method="POST">
+                        @csrf
                     @foreach ($cartProducts as $item)
                         <tr>
                             <td>
@@ -46,16 +48,12 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center">
-                                <form class="count-input">
-                                    <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </form>
+                            <td class="text-center col-1" >
+                         
+                                    <input class="form-control" type="hidden" name="incart_id[]" id="" value="{{$item->cart_id}}">
+                                    <input class="form-control" type="hidden" name="product_id[]" id="" value="{{$item->id}}">
+                                    <input class="form-control" type="text" name="qty[]" id="" value="{{$item->cart_qty}}">   
+                                
                             </td>
                             <td class="text-center text-lg text-medium">${{ $item->price }}</td>
                             <td class="text-center text-lg text-medium">$0.00</td>
@@ -64,27 +62,66 @@
                                     data-original-title="Remove item"><i class="fa fa-trash"></i></a></td>
                         </tr>
                     @endforeach
+                </form>
+                </tbody>
+            </table>
+        </div>
+        <div class="shopping-cart-footer border-top-0">
+            <div class="column">
+                {{-- <form class="coupon-form" method="post">
+                    <input class="form-control form-control-sm" type="text" placeholder="Coupon code" required="">
+                    <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
+                </form> --}}
+            </div>
+            <div class="column text-lg"><strong> Subtotal: <span class="text-medium">$<?php echo $total; ?></span></strong></div>
+        </div>
+        <div class="shopping-cart-footer">
+            <div class="column"><a class="btn btn-outline-secondary" href="{{ url("/") }}"><i
+                        class="icon-arrow-left"></i>&nbsp;Back to
+                    Shopping</a></div>
+            <div class="column">
+                <button class="btn btn-primary" data-toast="" data-toast-type="success"
+                data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart"
+                data-toast-message="is updated successfully!" form = "form_qty" type="submit">Update Cart</button>
+                    <a class="btn btn-success" href="{{ url('/order-now') }}">Order Now</a>
+                </div>
+        </div>
+        @endif
+        @if (count($cartProducts)<= 0)
+        <div class="table-responsive shopping-cart">
+            <table class="table">
+                <thead>
+                    <tr>
+                        
+                        <th class="text-center" style="font-size: 25px">Hi, Have a good day ! </th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                    <tr>
+                        
+                       
+                        <td class="border-bottom-0">
+                            <div class="product-item">
+                                <div class="alert alert-warning alert-dismissible fade show text-center" style="margin-bottom: 30px;">
+                                    There are no products in your cart !!
+                                    <span class="alert-close" data-dismiss="alert"></span></div>
+                            </div>
+                        </td>
+                        
+                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="shopping-cart-footer">
-            <div class="column">
-                <form class="coupon-form" method="post">
-                    <input class="form-control form-control-sm" type="text" placeholder="Coupon code" required="">
-                    <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
-                </form>
-            </div>
-            <div class="column text-lg">Subtotal: <span class="text-medium">$<?php echo $total; ?></span></div>
-        </div>
-        <div class="shopping-cart-footer">
-            <div class="column"><a class="btn btn-outline-secondary" href="#"><i
+            <div class="column"><a class="btn btn-outline-secondary" href="{{ url("/") }}"><i
                         class="icon-arrow-left"></i>&nbsp;Back to
                     Shopping</a></div>
-            <div class="column"><a class="btn btn-primary" href="#" data-toast="" data-toast-type="success"
-                    data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart"
-                    data-toast-message="is updated successfully!">Update Cart</a><a class="btn btn-success"
-                    href="{{ url('/order-now') }}">Order Now</a></div>
+           
         </div>
+        @endif
     </div>
 
     {{-- <script type="text/javascipt">

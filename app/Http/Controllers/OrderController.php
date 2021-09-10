@@ -23,11 +23,12 @@ class OrderController extends Controller
         if (Session::has('user')) {
             $userID =  Session::get('user')['id'];
             $allCart = Cart::where('user_id',$userID)->get();
-            foreach($allCart as $item){
+            foreach($allCart as $key => $item){
                 $order = new Order();
                 $order->firstname = $req->firstname;
                 $order->lastname = $req->lastname;
                 $order->product_id = $item->product_id;
+                $order->cart_id =   $item->id;
                 $order->user_id =   $item->user_id;
                 $order->address = $req->address;
                 $order->status = "Pending";
@@ -35,11 +36,16 @@ class OrderController extends Controller
                 $order->phone =  $req->phone_number;
                 $order->payment_method = $req-> payment_method;
                 $order->save();
-                Cart::where('user_id',$userID)->delete();
-           
+                $cart_item =  Cart::where('id',$item->id)->get()->first();
+                $cart_item ->status = 0;
+                $cart_item ->save();
             }
-            $value = "duong";
-            $req->session()->flash('key', $value);
+            // if(Session::has('arr_cartid')){
+            //     foreach(Session::get('arr_cartid') as $item)
+               
+            // }
+            // $value = "duong";
+            // $req->session()->flash('key', $value);
             return redirect("/my-orders");
             // return view('order_now');
         } else {
@@ -50,11 +56,24 @@ class OrderController extends Controller
     function orderNow()
     {
         if (Session::has('user')) {
+            // $arr_qty = array();
+            // $arr_cartid = array();
             $userID =  Session::get('user')['id'];
-            $total_price_products = DB::table('cart')->join('products', 'cart.product_id', '=', 'products.id')->where('cart.user_id', $userID)->sum('products.price');
+            $total_price_products = DB::table('cart')->join('products', 'cart.product_id', '=', 'products.id')->where('cart.user_id', $userID)->where('cart.status', 1)->sum(DB::raw('products.price * cart.qty'));
             // var_dump( $products);
-            $products = DB::table('cart')->join('products', 'cart.product_id', '=', 'products.id')->where('cart.user_id', $userID)->select('products.*')->get();
-            $amount =  Cart::where('user_id',$userID)->count();
+            $products = DB::table('cart')->join('products', 'cart.product_id', '=', 'products.id')->where('cart.user_id', $userID)->where('cart.status', 1)->select('products.*','cart.qty as cart_qty','cart.id as cart_id')->get();
+         
+                // foreach($products as $products_item){
+                //     // echo" <pre>";
+                //     // var_dump($products_item->cart_qty);
+                //     // echo "</pre>";
+                //     // array_push($arr_qty , $products_item->);
+                //     array_push($arr_cartid , $products_item->cart_id);
+
+                // }
+               
+                Session::put('message','Order Successfully, Thanks!');
+                $amount =  Cart::where('user_id',$userID)->where('cart.status', 1)->count();
 
             return view('order_now', ['total' => $total_price_products, 'amount' => $amount, 'products_in_cart' => $products]);
         } else {
@@ -66,9 +85,11 @@ class OrderController extends Controller
     {
         if (Session::has('user')) {
             $userID =  Session::get('user')['id'];
-            $orders = DB::table('orders')->join('products', 'orders.product_id', '=', 'products.id')->where('orders.user_id', $userID)->get();
+            $orders = DB::table('orders')->join('products', 'orders.product_id', '=', 'products.id')->join('cart', 'orders.cart_id', '=', 'cart.id')->where('orders.user_id', $userID)->select('products.*','orders.*','cart.qty as cart_qty','cart.id as cart_id')->orderBy('orders.id', 'desc')->get();
+        //     $orders_price =  DB::table('orders')->join('products', 'orders.product_id', '=', 'products.id')->join('cart', 'orders.cart_id', '=', 'cart.id')->where('orders.user_id', $userID)->sum(DB::raw('products.price * cart.qty'))->get();
+
         //     echo" <pre>";
-        //    var_dump( $orders);
+        //    var_dump( $orders_price);
         //    echo "</pre>";
         //    die();
             return view('my_orders', ['orders' => $orders]);

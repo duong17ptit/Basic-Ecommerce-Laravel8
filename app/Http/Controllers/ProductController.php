@@ -23,7 +23,4 @@ class ProductController extends Controller
         return view('product_detail',[ 'item'=> $data ]);
     }
     
-
-    
-
 }

@@ -3,13 +3,14 @@
 <div class="container my-3 my-md-5">
     <link rel="stylesheet" href="{{ asset('resources/css/css_myorders.css') }}">
     <article class="card pt">
-         @if (Session()->has('key'))
-            <div class="alert alert-danger" role="alert">
-                {{Session()->get('key')}}
-            </div>
+        @if (Session::has('message'))
+        <div class="alert alert-success" role="alert">
+            {{Session::get('message')}} 
+            {{Session::forget('message')}}
+        </div>
         @endif
         <header class="card-header"> My Orders / Tracking </header>
-        @foreach ($orders as $item_order)
+        @foreach ($orders as $key => $item_order)
 
         <div class="card-body">
     
@@ -34,7 +35,9 @@
                     <figure class="itemside mb-3">
                         <div class="aside"><img src="{{ $item_order->gallery}}" class="img-sm border"></div>
                         <figcaption class="info align-self-center">
-                            <p class="title">{{$item_order->name}} <br>Color: {{$item_order->color}}</p> <span class="text-muted">${{$item_order->price}} </span>
+                            <p class="title">{{$item_order->name}} <br>Color: {{$item_order->color}}</p> 
+                            <span class="text-muted">${{$item_order->price}} x {{$item_order->cart_qty}}  </span> <br>
+                            <span class="text-muted">Total : ${{$item_order->price * $item_order->cart_qty}}</span> 
                         </figcaption>
                     </figure>
                 </li>

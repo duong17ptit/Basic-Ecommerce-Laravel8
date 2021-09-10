@@ -43,10 +43,10 @@ Route::get('/product', [ProductController::class,'index']);
 Route::get('/product/detail/{id}', [ProductController::class,'detail']);
 
 Route::post('/add-to-cart', [CartController::class,'addToCart']);
-Route::get('/cart', [CartController::class,'cartList']);
+Route::get('/cart', [CartController::class,'cartList'])->name('cartList');
 Route::get('/removeCart/{id}', [CartController::class,'removeCart']);
 Route::get('/clear-cart', [CartController::class,'removeAllCart']);
-
+Route::post('/cart/update',[CartController::class,'updateCart']);
 
 Route::get('/order-now', [OrderController::class,'orderNow']);
 Route::post('/checkout', [OrderController::class,'checkout']);
