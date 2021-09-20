@@ -1,5 +1,16 @@
 @extends('master')
 @section('content')
+
+    <script type="text/javascript">
+        window.onload = function() {
+
+            if (document.getElementById('showModal')) {
+
+                alert('Send Contact successfully!'); //replace with your own handler
+            }
+
+        }
+    </script>
     <link rel="stylesheet" href="{{ asset('resources/vendors/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/vendors/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/vendors/themify-icons/themify-icons.css') }}">
@@ -7,6 +18,12 @@
     <link rel="stylesheet" href="{{ asset('resources/vendors/owl-carousel/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/vendors/owl-carousel/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
+    @if (session('message'))
+
+    <input type="hidden" id="showModal" />
+    {{Session::forget('message')}}
+    
+    @endif
     <section class="blog-banner-area" id="contact">
         <div class="container h-100">
             <div class="blog-banner">
@@ -94,8 +111,9 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-lg-9">
-                    <form action="#/" class="form-contact contact_form" action="contact_process.php" method="post"
+                    <form class="form-contact contact_form" action="{{ url('/send-contact') }}" method="post"
                         id="contactForm" novalidate="novalidate">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="form-group">
@@ -107,19 +125,23 @@
                                         placeholder="Enter email address">
                                 </div>
                                 <div class="form-group">
+                                    <input class="form-control" name="phone" id="phone" type="number"
+                                        placeholder="Enter Your Phone Number">
+                                </div>
+                                <div class="form-group">
                                     <input class="form-control" name="subject" id="subject" type="text"
                                         placeholder="Enter Subject">
                                 </div>
                             </div>
                             <div class="col-lg-7">
                                 <div class="form-group">
-                                    <textarea class="form-control different-control w-100" name="message" id="message"
-                                        cols="30" rows="5" placeholder="Enter Message"></textarea>
+                                    <textarea class="form-control different-control w-100" name="content" id="content"
+                                        cols="30" rows="7" placeholder="Enter Content"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group text-center text-md-right mt-3">
-                            <button type="submit" class="button button--active button-contactForm">Send Message</button>
+                            <button type="submit" class="button button--active button-contactForm">Send Contact</button>
                         </div>
                     </form>
                 </div>

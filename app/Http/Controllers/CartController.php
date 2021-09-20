@@ -25,14 +25,14 @@ class CartController extends Controller
                 //    var_dump( $item->qty );
                 //    echo "</pre>";
                 //    die();
-                $item->qty =  $item->qty + 1;
+                $item->qty =  $item->qty +  $rq->product_qty_add;
                 $item->save();
                 return Redirect("/cart");
             } else {
                 $cart = new Cart();
                 $cart->user_id = $rq->session()->get('user')->id;
                 $cart->product_id  = $rq->product_id;
-                $cart->qty = 1;
+                $cart->qty = $rq->product_qty_add;
                 $cart->status = 1;
                 $cart->save();
                 return Redirect("/cart");

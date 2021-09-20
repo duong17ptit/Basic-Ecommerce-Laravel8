@@ -89,7 +89,7 @@ class OrderController extends Controller
         //     $orders_price =  DB::table('orders')->join('products', 'orders.product_id', '=', 'products.id')->join('cart', 'orders.cart_id', '=', 'cart.id')->where('orders.user_id', $userID)->sum(DB::raw('products.price * cart.qty'))->get();
 
         //     echo" <pre>";
-        //    var_dump( $orders_price);
+        //    var_dump($orders);
         //    echo "</pre>";
         //    die();
             return view('my_orders', ['orders' => $orders]);

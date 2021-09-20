@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-    <div class="container">
+    <div class="container mb-3">
         <div class="row">
             <div class="col-sm-7 col-6">
                 <img src="{{ $item->gallery }}" class="d-block w-100" alt="{{ $item->name }}">
@@ -14,8 +14,12 @@
                 <p> Details : {{ $item->description }}</p>
                 <form action="{{url('/add-to-cart') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="product_id" value="{{ $item->id }}">
-                    <button class="btn btn-primary"> Add to cart </button>
+                    <div class="d-flex">
+                        <input class="form-control col-2 mr-2" type="number" name="product_qty_add" min="1" value="1">
+                        <input type="hidden" name="product_id" value="{{ $item->id }}">
+                        <button class="btn btn-primary"> Add to cart </button>
+                    </div>
+                   
                 </form>
                 
                 <br>

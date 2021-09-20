@@ -52,7 +52,7 @@
                          
                                     <input class="form-control" type="hidden" name="incart_id[]" id="" value="{{$item->cart_id}}">
                                     <input class="form-control" type="hidden" name="product_id[]" id="" value="{{$item->id}}">
-                                    <input class="form-control" type="text" name="qty[]" id="" value="{{$item->cart_qty}}">   
+                                    <input class="form-control" type="number" min="1" name="qty[]" id="" value="{{$item->cart_qty}}">   
                                 
                             </td>
                             <td class="text-center text-lg text-medium">${{ $item->price }}</td>
