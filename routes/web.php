@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -62,7 +63,18 @@ Route::post('/send-contact', [HomeController::class,'sendContact']);
 
 //end-customer
 
-//admin
+//-------------admin--------------
+//login
+Route::get('/admin/login', [UserController::class,'adminLogin']);
+Route::post('/checkAdmin', [UserController::class,'adminCheck']);
+
+Route::group(['middleware' => 'auth.admin'], function () {
+
+    Route::get('/admin/logout', function () {
+
+        Session::forget('user');
+        return Redirect("/admin/login"); 
+    });
 Route::get('/admin/dashboard', function () {
     return View("admin.dashboard");
 });
@@ -73,6 +85,16 @@ Route::post('/admin/products/create',[ProductController::class,'createProduct'])
 Route::post('/admin/products/update',[ProductController::class,'updateProduct']);
 Route::post('/admin/products/delete',[ProductController::class,'removeProduct']);
 
+//end-product
 
+//orders
+Route::get('/admin/orders',[OrderController::class,'adminOrders']);
+Route::get('/admin/orders/list',[OrderController::class,'listOrder']);
+
+//end-orders
+
+
+
+});
 
 //end-admin

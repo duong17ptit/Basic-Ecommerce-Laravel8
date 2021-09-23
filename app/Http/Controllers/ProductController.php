@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 class ProductController extends Controller
@@ -33,11 +34,20 @@ class ProductController extends Controller
     {
         # code...
         $data = Product::all();
+        if(Auth::user()){
+            var_dump(Auth::id()) ;
+            die();
+        }
         return view('product',[ 'products'=> $data ]);
     }
     function detail($id){
         $data = Product::find($id);
+        if(Auth::user()){
+            var_dump(Auth::id()) ;
+            die();
+        }
         return view('product_detail',[ 'item'=> $data ]);
+        
     }
 
     

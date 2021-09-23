@@ -40,7 +40,7 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						@if (Session::has('messa'))
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
 							{{Session::get('messa')}} 
 							{{Session::forget('messa')}}
 							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

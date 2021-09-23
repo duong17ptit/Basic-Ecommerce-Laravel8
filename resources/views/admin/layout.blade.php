@@ -111,14 +111,13 @@
                                 <div class="arrow_box_right"><a class="dropdown-item" href="#"><span
                                             class="avatar avatar-online"><img
                                                 src="{{ URL::asset('resources/admin/theme-assets/images/gallery/avata.jpg')}}"
-                                                alt="avatar"><span class="user-name text-bold-700 ml-1">John
-                                                Doe</span></span></a>
+                                                alt="avatar"><span class="user-name text-bold-700 ml-1">{{Session::get('user')['name']}}</span></span></a>
                                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
                                             class="ft-user"></i> Edit Profile</a><a class="dropdown-item"
                                         href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item"
                                         href="#"><i class="ft-check-square"></i> Task</a><a class="dropdown-item"
                                         href="#"><i class="ft-message-square"></i> Chats</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="{{ url('/admin/logout') }}"><i
                                             class="ft-power"></i> Logout</a>
                                 </div>
                             </div>
@@ -148,11 +147,11 @@
                 <li class="nav-item"><a href="{{ url('/admin/products') }}"><i class="ft-box"></i><span
                             class="menu-title" data-i18n="">Products</span></a>
                 </li>
-                <li class="nav-item"><a href=""><i class="ft-droplet"></i><span class="menu-title"
+                {{-- <li class="nav-item"><a href=""><i class="ft-droplet"></i><span class="menu-title"
                             data-i18n="">Icons</span></a>
-                </li>
-                <li class="nav-item"><a href=""><i class="ft-layers"></i><span class="menu-title"
-                            data-i18n="">Cards</span></a>
+                </li> --}}
+                <li class="nav-item"><a href="{{ url('/admin/orders') }}"><i class="ft-layers"></i><span class="menu-title"
+                            data-i18n="">Orders</span></a>
                 </li>
                 <li class="nav-item"><a href=""><i class="ft-box"></i><span class="menu-title"
                             data-i18n="">Buttons</span></a>

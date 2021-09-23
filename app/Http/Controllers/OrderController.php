@@ -99,4 +99,41 @@ class OrderController extends Controller
         // return View('my_orders');
     }
 
+
+    //admin
+        
+    function adminOrders()
+    {
+        # code...
+        return view('admin.orderList');
+
+    }
+    function listOrder(Request $req)
+    {
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $limit = isset($_GET['limit']) ? $_GET['limit'] : 7;
+        // echo  $page;
+        // echo $limit;
+        $offset = ((int)$page - 1) * $limit;
+        $data = DB::table('orders')->join('products', 'orders.product_id', '=', 'products.id')->select('products.*','orders.*')->orderBy('orders.id', 'desc')->offset($offset)->limit($limit)->get();
+
+   
+        // $data =  DB::table('orders')->offset($offset)->limit($limit)->get();
+        // var_dump($data);
+        // die();
+        $total= DB::table('orders')->join('products', 'orders.product_id', '=', 'products.id')->select('products.*','orders.*')->count();
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Thanh Cong',
+            'data' => $data,
+            'total'=> $total,
+            'page' => $page,
+            'offset' => $offset
+        ]);
+        // return View('my_orders');
+    }
+
+    //endadmin
+
 }
