@@ -19,7 +19,7 @@ class isAdmin
     public function handle(Request $request, Closure $next)
     {
 
-         if($request->session()->has('user') and $request->session()->get('user')['role'] == "admin" ){
+         if($request->session()->has('userAD') and $request->session()->get('userAD')['role'] == "admin" ){
             return $next($request);
         }
         return redirect()->back();

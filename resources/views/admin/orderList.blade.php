@@ -56,7 +56,7 @@
                                             <td> @{{ item.address }}</td>
                                             <td> @{{ item.status }}</td>
                                             <td><button type="button" class="btn btn-warning btn-min-width mr-1 mb-1"
-                                                   >Edit</button>
+                                                 v-on:click="editItem(item)" >Edit</button>
                                                 <button type="button" class="btn btn-danger btn-min-width mr-1 mb-1"
                                                    >Delete</button>
                                             </td>
@@ -147,7 +147,7 @@
                         <!--End New Modal -->
 
                         <!-- Edit modal -->
-                        {{-- <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="editModal" data-bs-backdrop="static" tabindex="-1" role="dialog"
                             aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -158,55 +158,71 @@
                                     </div>
                                     <div class="modal-body" v-if="item">
                                         <form method="POST" id="edit_form"
-                                            data-action="{{ url('/admin/products/update') }}">
+                                            data-action="{{ url('/admin/orders/update') }}">
                                             <input type="hidden" name="id" v-model="item.id">
                                             <div class="row">
                                                 <div class="form-group col-12">
-                                                    <label for="ho_add" class="col-form-label">Product Name</label>
-                                                    <input type="text" name="prd_name" v-model="item.name"
-                                                        class="form-control" id="ho_add">
+                                                    <label for="ho_add" class="col-form-label">First Name</label>
+                                                    <input type="text" name="or_firstname" v-model="item.firstname"
+                                                        class="form-control" id="">
                                                     <template v-if="new_response.error">
-                                                        <span v-for="errName in new_response.error.prd_name"
-                                                            class="text-danger">@{{ errName }}</span>
+                                                        {{-- <span v-for="errName in new_response.error.prd_name"
+                                                            class="text-danger">@{{ errName }}</span> --}}
                                                     </template>
                                                 </div>
                                                 <div class="form-group col-12">
-                                                    <label for="ten_add" class="col-form-label">Price</label>
-                                                    <input type="text" name="prd_price" class="form-control"
-                                                        id="prd_price" v-model="item.price">
+                                                    <label for="ho_add" class="col-form-label">Last Name</label>
+                                                    <input type="text" name="or_lastname" v-model="item.lastname"
+                                                        class="form-control" id="">
                                                     <template v-if="new_response.error">
-                                                        <span v-for="errName in new_response.error.prd_price"
-                                                            class="text-danger">@{{ errName }}</span>
+                                                        {{-- <span v-for="errName in new_response.error.prd_name"
+                                                            class="text-danger">@{{ errName }}</span> --}}
                                                     </template>
                                                 </div>
                                                 <div class="form-group col-12">
-                                                    <label for="sdt_add" class="col-form-label">Category</label>
-                                                    <input type="text" v-model="item.category" name="prd_cate"
-                                                        class="form-control" id="prd_cate">
+                                                    <label for="ten_add" class="col-form-label">Address</label>
+                                                    <input type="text" name="or_address" class="form-control"
+                                                        id="or_address" v-model="item.address">
+                                                    <template v-if="new_response.error">
+                                                        {{-- <span v-for="errName in new_response.error.prd_price"
+                                                            class="text-danger">@{{ errName }}</span> --}}
+                                                    </template>
+                                                </div>
+                                                <div class="form-group col-12">
+                                                    <label for="sdt_add" class="col-form-label">Phone</label>
+                                                    <input type="text" v-model="item.phone" name="or_phone"
+                                                        class="form-control" id="or_phone">
                                                     <span class="text-danger"></span>
                                                 </div>
                                                 <div class="form-group col-12">
-                                                    <label for="sdt_add" class="col-form-label">Color</label>
-                                                    <input type="text" v-model="item.color" name="prd_color"
-                                                        class="form-control" id="prd_color">
+                                                    <label for="sdt_add" class="col-form-label">Status</label>
+                                                    <select class="form-select" v-model="item.status"  name="or_status" aria-label="">
+                                                       
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Order confirmed">Order confirmed</option>
+                                                        <option value="Out for Delivery">Out for Delivery</option>
+                                                        <option value="Delivered">Delivered</option>
+                                                      </select>
+                                                    {{-- <input type="text" 
+                                                        class="form-control" id="prd_color"> --}}
                                                     <template v-if="new_response.error">
-                                                        <span v-for="errName in new_response.error.prd_color"
-                                                            class="text-danger">@{{ errName }}</span>
+                                                        {{-- <span v-for="errName in new_response.error.prd_color"
+                                                            class="text-danger">@{{ errName }}</span> --}}
                                                     </template>
                                                 </div>
-                                                <div class="form-group col-12">
+                                                {{-- <div class="form-group col-12">
                                                     <label for="sdt_add" class="col-form-label">Gallery</label>
                                                     <input type="text" v-model="item.gallery" name="prd_gallery"
                                                         class="form-control" id="prd_gallery">
                                                     <span class="text-danger"></span>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group col-12">
                                                     <label for="sdt_add" class="col-form-label">Description</label>
-                                                    <input type="text" v-model="item.description" name="prd_desc"
-                                                        class="form-control" id="prd_desc">
+                                                    <input type="text" v-model="item.description" name="or_desc"
+                                                        class="form-control" id="or_desc">
                                                     <template v-if="new_response.error">
-                                                        <span v-for="errName in new_response.error.prd_desc"
-                                                            class="text-danger">@{{ errName }}</span>
+                                                        {{-- <span v-for="errName in new_response.error.prd_desc"
+                                                            class="text-danger">@{{ errName }}</span> --}}
                                                     </template>
                                                 </div>
                                             </div>
@@ -220,7 +236,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <!-- End Edit modal -->
                         <!-- Delete Modal -->
 
@@ -266,7 +282,7 @@
                 items: [],
                 item: {},
                 pageList: [],
-                limit: 6,
+                limit: 10,
                 current_page: 1,
                 new_response: '',
                 alerts: [],
@@ -391,46 +407,46 @@
                 //             }
                 //         });
                 // },
-                // submitEdit() {
-                //     $.ajaxSetup({
-                //         headers: {
-                //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //         }
-                //     })
-                //     let form = document.getElementById('edit_form');
-                //     var data = new FormData(form);
-                //     var that = this;
-                //     var action = $('#edit_form').attr('data-action');
-                //     // this.formAttr.forEach(function(item) {
-                //     //     if (item.type == 'ckedit') {
-                //     //         var contentAdd = CKEDITOR.instances['ckeditor-create'].getData();
-                //     //         data.set('mota', contentAdd);
-                //     //     }
-                //     // });
-                //     $.ajax({
-                //             processData: false,
-                //             contentType: false,
-                //             method: "POST",
-                //             url: action,
-                //             data: data
-                //         })
-                //         .done(function(response) {
-                //             if (response.code === 200) {
-                //                 that.new_response = '';
-                //                 that.alerts.push(response.message);
-                //                 that.getList();
-                //                 $('#editModal').modal('hide');
-                //                 // $('#edit_form')[0].reset();
-                //                 // $('#editModal').button('reset');
-                //                 // $('#image_profile').hide();
-                //                 // CKEDITOR.instances['ckeditor-create'].setData('');
-                //             } else {
-                //                 that.new_response = response;
-                //                 console.log(that.new_response.error);
-                //                 console.log(that.new_response.error.prd_name);
-                //             }
-                //         });
-                // },
+                submitEdit() {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+                    let form = document.getElementById('edit_form');
+                    var data = new FormData(form);
+                    var that = this;
+                    var action = $('#edit_form').attr('data-action');
+                    // this.formAttr.forEach(function(item) {
+                    //     if (item.type == 'ckedit') {
+                    //         var contentAdd = CKEDITOR.instances['ckeditor-create'].getData();
+                    //         data.set('mota', contentAdd);
+                    //     }
+                    // });
+                    $.ajax({
+                            processData: false,
+                            contentType: false,
+                            method: "POST",
+                            url: action,
+                            data: data
+                        })
+                        .done(function(response) {
+                            if (response.code === 200) {
+                                that.new_response = '';
+                                that.alerts.push(response.message);
+                                that.getList();
+                                $('#editModal').modal('hide');
+                                // $('#edit_form')[0].reset();
+                                // $('#editModal').button('reset');
+                                // $('#image_profile').hide();
+                                // CKEDITOR.instances['ckeditor-create'].setData('');
+                            } else {
+                                that.new_response = response;
+                                console.log(that.new_response.error);
+                                console.log(that.new_response.error.prd_name);
+                            }
+                        });
+                },
             }
         });
 

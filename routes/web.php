@@ -67,6 +67,10 @@ Route::post('/send-contact', [HomeController::class,'sendContact']);
 //login
 Route::get('/admin/login', [UserController::class,'adminLogin']);
 Route::post('/checkAdmin', [UserController::class,'adminCheck']);
+//register 
+Route::get('/admin/register', [UserController::class,'adminSignUp']);
+Route::post('/registerAdmin', [UserController::class,'adminRegister']);
+
 
 Route::group(['middleware' => 'auth.admin'], function () {
 
@@ -78,6 +82,12 @@ Route::group(['middleware' => 'auth.admin'], function () {
 Route::get('/admin/dashboard', function () {
     return View("admin.dashboard");
 });
+Route::get('/admin/profile',[UserController::class,'profileAdmin']);
+Route::post('/admin/profile/update',[UserController::class,'updateProfileAdmin']);
+Route::get('/admin/profile/password', function () {
+    return View("admin.changePasswordUser");
+});
+Route::post('/admin/profile/change-pass',[UserController::class,'changePasswordUserAdmin']);
 //product
 Route::get('/admin/products',[ProductController::class,'productsAdmin']);
 Route::get('/admin/products/list',[ProductController::class,'productsList']);
@@ -90,7 +100,7 @@ Route::post('/admin/products/delete',[ProductController::class,'removeProduct'])
 //orders
 Route::get('/admin/orders',[OrderController::class,'adminOrders']);
 Route::get('/admin/orders/list',[OrderController::class,'listOrder']);
-
+Route::post('/admin/orders/update',[OrderController::class,'updateOrder']);
 //end-orders
 
 

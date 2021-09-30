@@ -58,7 +58,10 @@ class OrderController extends Controller
         if (Session::has('user')) {
             // $arr_qty = array();
             // $arr_cartid = array();
+            
             $userID =  Session::get('user')['id'];
+            $allCart = Cart::where('user_id',$userID)->get();
+            // Session::put('cart', $allCart);
             $total_price_products = DB::table('cart')->join('products', 'cart.product_id', '=', 'products.id')->where('cart.user_id', $userID)->where('cart.status', 1)->sum(DB::raw('products.price * cart.qty'));
             // var_dump( $products);
             $products = DB::table('cart')->join('products', 'cart.product_id', '=', 'products.id')->where('cart.user_id', $userID)->where('cart.status', 1)->select('products.*','cart.qty as cart_qty','cart.id as cart_id')->get();
@@ -72,12 +75,12 @@ class OrderController extends Controller
 
                 // }
                
-                Session::put('message','Order Successfully, Thanks!');
+                // Session::put('message','Order Successfully, Thanks!');
                 $amount =  Cart::where('user_id',$userID)->where('cart.status', 1)->count();
 
             return view('order_now', ['total' => $total_price_products, 'amount' => $amount, 'products_in_cart' => $products]);
         } else {
-            return Redirect("/cart");
+            return Redirect("/login");
         }
     }
 
@@ -132,6 +135,47 @@ class OrderController extends Controller
             'offset' => $offset
         ]);
         // return View('my_orders');
+    }
+
+    function  updateOrder(Request $req)
+    {
+
+        if ($_POST) {
+            $order = Order::find($_POST['id']);
+            // $validator = Validator::make($req->all(), [
+            //     'prd_name' => ['required',Rule::unique('products','name')->ignore($product->id),],
+            //     'prd_desc' => 'required',
+            //     'prd_price' => 'required|numeric',
+            //     'prd_color' => 'required',
+            // ], $this->messages, $this->attributes);
+
+           
+   
+                $order->firstname = $_POST['or_firstname'];
+                $order->lastname = $_POST['or_lastname'];
+                $order->address = $_POST['or_address'];
+                $order->phone = $_POST['or_phone'];
+                $order->description = $_POST['or_desc']; 
+                $order->status = $_POST['or_status'];
+                $order->save();
+                return response()->json([
+                'code' => 200,
+                'message' => 'Update Successfully !'
+               
+             ]);
+         }
+            else{
+                return response()->json([
+                    'code' => 500,
+                    'error' => 'Update Failture !',
+                ]);
+            }
+         
+       
+        # code...
+        // $data = Product::all();
+        // return view('admin.productList',['products'=> $data ]);
+
     }
 
     //endadmin

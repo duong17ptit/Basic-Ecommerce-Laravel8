@@ -43,11 +43,16 @@
                                     onblur="this.placeholder = 'Confirm Password'">
                             </div>
                             <div class="col-md-12 form-group">
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    placeholder="Your phone number" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Your phone number'">
+                            </div>
+                            {{-- <div class="col-md-12 form-group">
                                 <div class="creat_account">
                                     <input type="checkbox" id="f-option2" name="selector">
                                     <label for="f-option2">Keep me logged in</label>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-12 form-group">
                                 <button type="submit" value="submit" class="button button-register w-100">Register</button>
                             </div>

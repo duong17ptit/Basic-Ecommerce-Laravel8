@@ -105,14 +105,14 @@
                         <li class="dropdown dropdown-user nav-item"><a
                                 class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                                 <span class="avatar avatar-online"><img
-                                        src="{{ URL::asset('resources/admin/theme-assets/images/gallery/avata.jpg')}}"
+                                        src="{{ URL::asset('resources/images/'.Session::get('userAD')['image'])}}"
                                         alt="avatar"><i></i></span></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="arrow_box_right"><a class="dropdown-item" href="#"><span
                                             class="avatar avatar-online"><img
-                                                src="{{ URL::asset('resources/admin/theme-assets/images/gallery/avata.jpg')}}"
-                                                alt="avatar"><span class="user-name text-bold-700 ml-1">{{Session::get('user')['name']}}</span></span></a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
+                                                src="{{ URL::asset('resources/images/'.Session::get('userAD')['image'])}}"
+                                                alt="avatar"><span class="user-name text-bold-700 ml-1">{{Session::get('userAD')['name']}}</span></span></a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="{{url('/admin/profile') }}"><i
                                             class="ft-user"></i> Edit Profile</a><a class="dropdown-item"
                                         href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item"
                                         href="#"><i class="ft-check-square"></i> Task</a><a class="dropdown-item"
@@ -153,25 +153,11 @@
                 <li class="nav-item"><a href="{{ url('/admin/orders') }}"><i class="ft-layers"></i><span class="menu-title"
                             data-i18n="">Orders</span></a>
                 </li>
-                <li class="nav-item"><a href=""><i class="ft-box"></i><span class="menu-title"
-                            data-i18n="">Buttons</span></a>
-                </li>
-                <li class="nav-item"><a href=""><i class="ft-bold"></i><span class="menu-title"
-                            data-i18n="">Typography</span></a>
-                </li>
-                <li class="nav-item"><a href=""><i class="ft-credit-card"></i><span class="menu-title"
-                            data-i18n="">Tables</span></a>
-                </li>
-                <li class="nav-item"><a href=""><i class="ft-layout"></i><span class="menu-title"
-                            data-i18n="">Form Elements</span></a>
-                </li>
-                <li class="nav-item"><a href=""><i class="ft-book"></i><span class="menu-title"
-                            data-i18n="">Documentation</span></a>
-                </li>
+                <li class="nav-item"><a href="{{ url('/admin/profile') }}"><i class="la la-user"></i><span class="menu-title"
+                    data-i18n="">Profile</span></a>
+        </li>
             </ul>
-        </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1"
-            href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/"
-            target="_blank">Download PRO!</a>
+        </div>
         <div class="navigation-background"></div>
     </div>
 

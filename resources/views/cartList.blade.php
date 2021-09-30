@@ -13,13 +13,14 @@
         {{-- <div class="alert alert-danger" role="alert">
             {{Session::get('remove_message')}}
         </div> --}}
-
+            {{-- @include('flash-message') --}}
         @if (Session::has('message'))
         <div class="alert alert-success" role="alert">
             {{Session::get('message')}} 
             {{Session::forget('message')}}
         </div>
         @endif
+        
         @if (count($cartProducts)>0)
         <div class="table-responsive shopping-cart">
             <table class="table">
