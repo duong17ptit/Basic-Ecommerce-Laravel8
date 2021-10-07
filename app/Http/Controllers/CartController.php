@@ -66,6 +66,7 @@ class CartController extends Controller
                 return Redirect("/cart");
             }
         } 
+        else  return Redirect("/login");
        
     }
     static function cartItem()
